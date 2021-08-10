@@ -1,0 +1,37 @@
+[
+    {
+        "content": "wow, you're so right!",
+        "user_id": 1,
+        "post_id": 1
+    },
+    {
+        "content": "BEEP BOOP I AM A FUNCTION WHAT WOULD YOU LIKE TO KNOW?",
+        "user_id": 5,
+        "post_id": 4
+    },
+    {
+        "content": "am lazy dog, can confirm",
+        "user_id": 3,
+        "post_id": 5
+    },
+    {
+        "content": "this is my comment",
+        "user_id": 1,
+        "post_id": 6
+    },
+    {
+        "content": "i'm a trol lol reeeeee",
+        "user_id": 4,
+        "post_id": 7
+    },
+    {
+        "content": "what is happening?",
+        "user_id": 1,
+        "post_id": 4
+    },
+    {
+        "content": "qui a fecit michi magna in potens est et sanctum nomens eus?",
+        "user_id": 2,
+        "post_id": 8
+    }
+]

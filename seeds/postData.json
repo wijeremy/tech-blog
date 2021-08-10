@@ -1,0 +1,47 @@
+[
+    {
+        "title": "wow this site is amazing",
+        "content": "see title for more information",
+        "user_id": 1
+    },
+    {
+        "title": "i'm excited",
+        "content": "looks like this app is the real deal",
+        "user_id": 2
+    },
+    {
+        "title": "i need help",
+        "content": "how do i log in?",
+        "user_id": 3
+    },
+    {
+        "title": "what is a function?",
+        "content": "nobody told me what a function is and at this point i'm too afriad to ask",
+        "user_id": 4
+    },
+    {
+        "title": "testingxxx ",
+        "content": "quick brown fox and all that jazz",
+        "user_id": 1
+    },
+    {
+        "title": "this is a title",
+        "content": "this is my content",
+        "user_id": 2
+    },
+    {
+        "title": "wow this site is amazing",
+        "content": "see title for more information",
+        "user_id": 3
+    },
+    {
+        "title": "did you know",
+        "content": "i don't know where i was going with that ",
+        "user_id": 4
+    },
+    {
+        "title": "lorem ipusm",
+        "content": "delores requisat con vivo un precipio del mio condrone. per diem los sientos mi delquipo un momenton fidlitus.",
+        "user_id": 1
+    }
+]
