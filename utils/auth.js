@@ -1,6 +1,6 @@
 const withAuth = (req, res, next) => {
+  console.log(req.url);
   if (!req.session.logged_in) {
-    console.log(req.body);
     res.redirect('/login');
   } else {
     next();

@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { User, Post } = require('../models');
 const withAuth = require('../utils/auth');
+const isOwned = require('../utils/owned');
+const { format_date } = require('../utils/helpers');
 
 router.get('/', withAuth, async (req, res) => {
   try {
@@ -13,7 +15,8 @@ router.get('/', withAuth, async (req, res) => {
 
     const postData = await Post.findAll();
     const posts = postData.map((i) => i.get({ plain: true }));
-    const namedPosts = posts.map((post) => {
+    // posts[0].holler();
+    posts.map((post) => {
       const getPostName = () => {
         for (let i = 0; i < users.length; i++) {
           if (post.user_id === users[i].id) {
@@ -23,15 +26,17 @@ router.get('/', withAuth, async (req, res) => {
       };
       const postName = getPostName();
       post.name = postName;
+      // post.owned = post.isOwned();
       return post;
     });
 
-    console.log(namedPosts);
-    console.log(users);
+    console.log(posts);
+    // console.log(users);
     res.render('homepage', {
       users,
       logged_in: req.session.logged_in,
       posts,
+      format_date,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -47,4 +52,56 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/user/:id', withAuth, isOwned, async (req, res) => {
+  try {
+    const userId = parseInt(req.params.id);
+    const user = await User.findByPk(userId);
+    const postData = await Post.findAll({
+      where: {
+        user_id: userId,
+      },
+    });
+
+    const posts = postData.map((i) => i.get({ plain: true }));
+    posts.map((i) => {
+      i.name = user.name;
+      i.owned = true;
+    });
+
+    res.render('homepage', {
+      user,
+      posts,
+      format_date,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    throw err;
+  }
+});
+
+router.get('/post/:id', withAuth, isOwned, async (req, res) => {
+  try {
+    const postId = parseInt(req.params.id);
+    const commentsData = await Comment.findAll({
+      where: {
+        post_id: postId,
+      },
+    });
+    const comments = commentsData.get({ plain: true });
+    comments.map((i) => {
+      if (i.user_id === req.session.user_id) {
+        i.owned = true;
+      }
+    });
+
+    const postData = await Post.findByPk(postId);
+    const post = postData.get({ plain: true });
+    res.render('post', {
+      post,
+      comments,
+    });
+  } catch (err) {
+    throw err;
+  }
+});
 module.exports = router;

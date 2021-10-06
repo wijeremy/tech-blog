@@ -1,0 +1,28 @@
+<div class='jumbotron'>
+  <h1 class='display-4'>{{post.title}}</h1>
+  <p>{{post.content}}</p>
+</div>
+{{#each comments as |comment|}}
+  <div class='card'>
+    <div class='card-body row' id={{comment.id}}>
+      <h5 class='card-title col-12 col-sm-3'>{{comment.title}}</h5>
+      <p class='col-12 col-sm-3'>by {{comment.name}}</p>
+      <p class='col-12 col-sm-3'>on {{format_date comment.createdAt}} </p>
+      {{#if comment.owned}}
+        <div class='btn-group col-12 col-sm-3' role='group'>
+          <button
+            type='button'
+            class='btn btn-primary'
+            id='edit-{{comment.id}}'
+          >edit</button>
+          <button
+            type='button'
+            class='btn btn-danger'
+            id='delete-{{comment.id}}'
+          >delete</button>
+        </div>
+      {{/if}}
+      <p>{{comment.content}}</p>
+    </div>
+  </div>
+{{/each}}

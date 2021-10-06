@@ -1,11 +1,23 @@
 {{#each posts as |post|}}
   <div class='card'>
-    <div class='card-body row'>
+    <div class='card-body row' id={{post.id}}>
       <h5 class='card-title col-12 col-sm-3'>{{post.title}}</h5>
       <p class='col-12 col-sm-3'>by {{post.name}}</p>
-      <p class='col-12 col-sm-3'>on {{post.createdAt}} </p>
+      <p class='col-12 col-sm-3'>on {{format_date post.createdAt}} </p>
+      {{#if post.owned}}
+        <div class='btn-group col-12 col-sm-3' role='group'>
+          <button
+            type='button'
+            class='btn btn-primary'
+            id='edit-{{post.id}}'
+          >edit</button>
+          <button
+            type='button'
+            class='btn btn-danger'
+            id='delete-{{post.id}}'
+          >delete</button>
+        </div>
+      {{/if}}
     </div>
   </div>
 {{/each}}
-
-<div> helo world</div>

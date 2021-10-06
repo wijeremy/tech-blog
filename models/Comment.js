@@ -2,9 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
-class Comment extends Model { 
-    //TODO: add function that checks if comment is owned by user
-}
+class Comment extends Model {}
 
 Comment.init(
   {
