@@ -2,8 +2,8 @@ const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
-class Post extends Model { 
-    //TODO: add function that checks if post is owned by user
+class Post extends Model {
+  //TODO: add function that checks if post is owned by user
 }
 
 Post.init(
@@ -32,7 +32,7 @@ Post.init(
   },
   {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'post',

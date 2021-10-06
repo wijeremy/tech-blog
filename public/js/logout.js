@@ -1,3 +1,5 @@
+console.log('logout reporting for duty');
+
 const logout = async () => {
   const response = await fetch('/api/users/logout', {
     method: 'POST',
