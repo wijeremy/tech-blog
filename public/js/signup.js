@@ -5,28 +5,33 @@ const signUpFormHandler = async (event) => {
   const password = document.getElementById('password').value.trim();
 
   if (name && email && password) {
-    const response1 = await fetch('/api/users/create', {
+    fetch('/api/users/create', {
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
       headers: { 'Content-Type': 'application/json' },
-    });
+    })
+      .then((response) => {
+        if (response.ok) {
+          fetch('/api/users/login', {
+            method: 'POST',
+            body: JSON.stringify({ email, password }),
+            headers: { 'Content-Type': 'application/json' },
+          })
+            .then((response) => {
+              if (response.ok) {
+                document.location.replace('/');
+              } else {
+                alert('Failed to log in');
+              }
+            })
+            .catch((err) => window.alert(err));
+        } else {
+          window.alert('Something went wrong in user creation, try again');
+        }
+      })
 
-    // if (response1.ok) {
-    //   const response2 = await fetch('/api/users/login', {
-    //     method: 'POST',
-    //     body: JSON.stringify({ email, password }),
-    //     headers: { 'Content-Type': 'application/json' },
-    //   });
-    //   if (response2.ok) {
-    //     document.location.replace('/');
-    //   } else {
-    //     alert('Failed to log in');
-    //   }
-    // } else {
-    //   alert('Failed to log in');
-    // }
+      .catch((err) => window.alert(err));
   }
-  console.log('hello');
 };
 
 document

@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
 router.post('/create', (req, res) => {
   const create = async () => {
     try {
-      User.create(req.body);
+      await User.create(req.body);
       res.json({ message: 'User Creation Successful!' });
     } catch (err) {
       res.status(400).json(err);
@@ -103,4 +103,12 @@ router.get('/comment', (req, res) => {
   finder();
 });
 
+router.get('/users', (req, res) => {
+  const find = async () => {
+    const userData = await User.findAll();
+    const users = userData.map((i) => i.get({ plain: true }));
+    res.json(users);
+  };
+  find();
+});
 module.exports = router;
