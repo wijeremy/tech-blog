@@ -132,4 +132,11 @@ router.get('/user', withAuth, (req, res) => {
 router.get('/post', withAuth, (req, res) => {
   res.render('postMaker');
 });
+
+router.get('/post/:id/edit', withAuth, isOwned, (req, res) => {
+  const id = parseInt(req.params.id);
+  const postData = Post.findByPk(id);
+  const post = postData.get({ plain: true });
+  res.render('postMaker', { post });
+});
 module.exports = router;

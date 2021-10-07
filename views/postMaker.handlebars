@@ -2,11 +2,15 @@
   <form>
     <div class='mb-3'>
       <label for='title' class='form-label'>Title</label>
-      <input type='text' class='form-control' id='title' />
+      <input type='text' class='form-control' id='title' value={{post.title}} />
     </div>
     <div class='mb-3'>
       <label for='content' class='form-label'>Content</label>
-      <textarea class='form-control' id='content' rows='3'></textarea>
+      <textarea
+        class='form-control'
+        id='content'
+        rows='3'
+      >{{post.content}}</textarea>
     </div>
     <input class='btn btn-primary' type='submit' value='Submit' id='post' />
   </form>

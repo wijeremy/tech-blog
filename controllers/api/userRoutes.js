@@ -94,6 +94,10 @@ router.delete('/comment/:id', (req, res) => {
   res.json({ message: 'hello' });
 });
 
+router.put('/comment/:id', (req, res) => {
+  console.log(req.body);
+});
+
 router.get('/comment', (req, res) => {
   const finder = async () => {
     const commentData = await Comment.findAll();
