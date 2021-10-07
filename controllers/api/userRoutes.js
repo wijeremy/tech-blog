@@ -35,6 +35,18 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.post('/create', (req, res) => {
+  const create = async () => {
+    try {
+      User.create(req.body);
+      res.json({ message: 'User Creation Successful!' });
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  };
+  create();
+});
+
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
