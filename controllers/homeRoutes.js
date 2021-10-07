@@ -122,4 +122,8 @@ router.get('/post/:id', withAuth, isOwned, async (req, res) => {
     throw err;
   }
 });
+
+router.get('/newpost', withAuth, (req, res) => {
+  res.render('postMaker');
+});
 module.exports = router;
