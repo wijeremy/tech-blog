@@ -13,8 +13,6 @@ const isOwned = async (req, res, next) => {
     case 'post':
       const postData = await Post.findByPk(id);
       const post = postData.get({ plain: true });
-      console.log(post);
-      console.log(req.session.user_id !== post.user_id);
       if (req.session.user_id !== post.user_id) {
         res.redirect('/');
       }

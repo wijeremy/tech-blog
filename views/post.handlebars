@@ -1,11 +1,15 @@
-<div class='jumbotron'>
+{{>navbar}}
+<div class='jumbotron p-5'>
   <h1 class='display-4'>{{post.title}}</h1>
   <p>{{post.content}}</p>
 </div>
+<ul class="list-group">
+  <li class="list-group-item">Comments</li>
+</ul>
 {{#each comments as |comment|}}
   <div class='card'>
     <div class='card-body row' id={{comment.id}}>
-      <h5 class='card-title col-12 col-sm-3'>{{comment.title}}</h5>
+        <p>{{comment.content}}</p>
       <p class='col-12 col-sm-3'>by {{comment.name}}</p>
       <p class='col-12 col-sm-3'>on {{format_date comment.createdAt}} </p>
       {{#if comment.owned}}
@@ -22,7 +26,6 @@
           >delete</button>
         </div>
       {{/if}}
-      <p>{{comment.content}}</p>
     </div>
   </div>
 {{/each}}
