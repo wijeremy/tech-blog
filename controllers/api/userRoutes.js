@@ -54,6 +54,14 @@ router.post('/post', (req, res) => {
   makePost();
 });
 
+router.delete('/post/:id', (req, res) => {
+  const deletePost = async () => {
+    const id = parseInt(req.params.id);
+    await Post.destroy({ where: { id } });
+  };
+  deletePost();
+});
+
 router.post('/comment', (req, res) => {
   const makeComment = async () => {
     const data = req.body;

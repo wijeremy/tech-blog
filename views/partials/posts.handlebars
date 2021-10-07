@@ -12,11 +12,13 @@
           <button
             type='button'
             class='btn btn-primary'
+            data-edit='{{post.id}}'
             id='edit-{{post.id}}'
           >edit</button>
           <button
             type='button'
             class='btn btn-danger'
+            data-delete={{post.id}}
             id='delete-{{post.id}}'
           >delete</button>
         </div>
@@ -24,3 +26,5 @@
     </div>
   </div>
 {{/each}}
+<script src='../js/deletepost.js'></script>
+<script src='../js/edit.js'></script>

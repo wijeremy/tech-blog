@@ -7,7 +7,9 @@ const comment = async () => {
     headers: { 'Content-Type': 'application/json' },
   });
   if (response.ok) {
-    document.location.reload();
+    setTimeout(() => {
+      document.location.reload();
+    }, 300);
   } else {
     alert(response.statusText);
   }
