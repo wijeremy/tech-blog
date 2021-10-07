@@ -30,8 +30,6 @@ router.get('/', withAuth, async (req, res) => {
       return post;
     });
 
-    console.log(posts);
-    // console.log(users);
     res.render('homepage', {
       users,
       logged_in: req.session.logged_in,
@@ -68,7 +66,6 @@ router.get('/user/:id', withAuth, isOwned, async (req, res) => {
       i.name = user.name;
       i.owned = true;
     });
-    console.log(user);
     res.render('homepage', {
       user,
       posts,
@@ -86,17 +83,12 @@ router.get('/post/:id', withAuth, isOwned, async (req, res) => {
     const postId = parseInt(req.params.id);
     const userData = await User.findAll();
     const users = userData.map((i) => i.get({ plain: true }));
-    console.log(users);
     const commentsData = await Comment.findAll({
       where: {
         post_id: postId,
       },
     });
     const comments = commentsData.map((i) => i.get({ plain: true }));
-    console.log(req.session);
-    console.log(req.session.user_id);
-    // console.log(comments[0].user_id);
-    console.log(comments);
     comments.map((i) => {
       if (i.user_id === req.session.user_id) {
         i.owned = true;
@@ -123,7 +115,7 @@ router.get('/post/:id', withAuth, isOwned, async (req, res) => {
   }
 });
 
-router.get('/newpost', withAuth, (req, res) => {
+router.get('/post', withAuth, (req, res) => {
   res.render('postMaker');
 });
 module.exports = router;

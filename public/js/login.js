@@ -1,8 +1,5 @@
-console.log('login reporting for duty');
-
 const loginFormHandler = async (event) => {
   event.preventDefault();
-  console.log('oooweee hes trying');
   const email = document.getElementById('log-in-email').value.trim();
   const password = document.getElementById('log-in-password').value.trim();
 
