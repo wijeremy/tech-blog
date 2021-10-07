@@ -4,7 +4,7 @@ const withAuth = require('../utils/auth');
 const isOwned = require('../utils/owned');
 const { format_date } = require('../utils/helpers');
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const userData = await User.findAll({
       attributes: { exclude: ['password'] },
@@ -78,30 +78,37 @@ router.get('/user/:id', withAuth, isOwned, async (req, res) => {
   }
 });
 
-router.get('/post/:id', withAuth, isOwned, async (req, res) => {
+router.get('/post/:id', async (req, res) => {
   try {
     const postId = parseInt(req.params.id);
-    const userData = await User.findAll();
+    const userData = await User.findAll({
+      attributes: { exclude: ['password', 'email'] },
+      order: [['name', 'ASC']],
+    });
     const users = userData.map((i) => i.get({ plain: true }));
+    console.log(users);
     const commentsData = await Comment.findAll({
       where: {
         post_id: postId,
       },
     });
     const comments = commentsData.map((i) => i.get({ plain: true }));
+    // console.log(comments);
     comments.map((i) => {
       if (i.user_id === req.session.user_id) {
         i.owned = true;
       }
+      console.log(i.user_id);
       const nameNames = () => {
-        for (let j = 0; j < users.length; i++) {
-          if (i.user_id === j.id) {
+        for (let j = 0; j < users.length; j++) {
+          if (i.user_id === users[j].id) {
             return users[j].name;
           }
         }
       };
       i.name = nameNames();
     });
+    console.log(comments);
     const postData = await Post.findByPk(postId);
     const post = postData.get({ plain: true });
     res.render('post', {
@@ -113,6 +120,10 @@ router.get('/post/:id', withAuth, isOwned, async (req, res) => {
   } catch (err) {
     throw err;
   }
+});
+
+router.get('/user', withAuth, (req, res) => {
+  res.render('login');
 });
 
 router.get('/post', withAuth, (req, res) => {
