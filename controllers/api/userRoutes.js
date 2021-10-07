@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { User, Post } = require('../../models');
-const sequelize = require('../../config/connection');
+const { User, Post, Comment } = require('../../models');
+// const sequelize = require('../../config/connection');
 
 router.post('/login', async (req, res) => {
   try {
@@ -47,11 +47,21 @@ router.post('/logout', (req, res) => {
 
 router.post('/post', (req, res) => {
   const makePost = async () => {
-    await sequelize.sync({ force: false });
     const data = req.body;
     data.user_id = req.session.user_id;
     await Post.create(data);
   };
   makePost();
 });
+
+router.post('/comment', (req, res) => {
+  const makeComment = async () => {
+    const data = req.body;
+    data.user_id = req.session.user_id;
+    console.log(data);
+    await Comment.create(data);
+  };
+  makeComment();
+});
+
 module.exports = router;

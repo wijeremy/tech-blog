@@ -1,5 +1,5 @@
 {{>navbar}}
-<div class='jumbotron p-5'>
+<div class='jumbotron p-5' data-id={{post.id}} id='post'>
   <h1 class='display-4'>{{post.title}}</h1>
   <p>{{post.content}}</p>
   <small class="text-muted">{{post.name}} ~ {{format_date post.createdAt}}</small>
@@ -29,3 +29,17 @@
     </div>
   </div>
 {{/each}}
+
+<ul class="list-group">
+  <li class="list-group-item">Write New Comment</li>
+</ul>
+<div class='m-3'>
+  <form>
+    <div class='mb-3'>
+      <label for='content' class='form-label'></label>
+      <textarea class='form-control' id='content' rows='3'></textarea>
+    </div>
+    <input class='btn btn-primary' type='submit' value='Submit' id='comment' />
+  </form>
+  <script src='../js/comment.js'></script>
+</div>
