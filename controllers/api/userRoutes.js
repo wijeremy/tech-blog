@@ -64,4 +64,23 @@ router.post('/comment', (req, res) => {
   makeComment();
 });
 
+router.delete('/comment/:id', (req, res) => {
+  const deleteComment = async () => {
+    const id = parseInt(req.params.id);
+    await Comment.destroy({ where: { id } });
+  };
+  deleteComment();
+  console.log('hello world');
+  res.json({ message: 'hello' });
+});
+
+router.get('/comment', (req, res) => {
+  const finder = async () => {
+    const commentData = await Comment.findAll();
+    const comments = commentData.map((i) => i.get({ plain: true }));
+    res.json(comments);
+  };
+  finder();
+});
+
 module.exports = router;

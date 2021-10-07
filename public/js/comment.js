@@ -7,7 +7,7 @@ const comment = async () => {
     headers: { 'Content-Type': 'application/json' },
   });
   if (response.ok) {
-    location.reload();
+    document.location.reload();
   } else {
     alert(response.statusText);
   }

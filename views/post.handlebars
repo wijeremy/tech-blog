@@ -22,6 +22,7 @@
           <button
             type='button'
             class='btn btn-danger'
+            data-delete = '{{comment.id}}'
             id='delete-{{comment.id}}'
           >delete</button>
         </div>
@@ -42,4 +43,5 @@
     <input class='btn btn-primary' type='submit' value='Submit' id='comment' />
   </form>
   <script src='../js/comment.js'></script>
+  <script src='../js/deletecomment.js'></script>
 </div>
