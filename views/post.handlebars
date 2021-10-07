@@ -2,6 +2,7 @@
 <div class='jumbotron p-5'>
   <h1 class='display-4'>{{post.title}}</h1>
   <p>{{post.content}}</p>
+  <small class="text-muted">{{post.name}} ~ {{format_date post.createdAt}}</small>
 </div>
 <ul class="list-group">
   <li class="list-group-item">Comments</li>
@@ -10,8 +11,7 @@
   <div class='card'>
     <div class='card-body row' id={{comment.id}}>
         <p>{{comment.content}}</p>
-      <p class='col-12 col-sm-3'>by {{comment.name}}</p>
-      <p class='col-12 col-sm-3'>on {{format_date comment.createdAt}} </p>
+        <small class="text-muted">{{comment.name}} ~ {{format_date comment.createdAt}}</small>
       {{#if comment.owned}}
         <div class='btn-group col-12 col-sm-3' role='group'>
           <button

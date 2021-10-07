@@ -81,36 +81,39 @@ router.get('/user/:id', withAuth, isOwned, async (req, res) => {
 router.get('/post/:id', async (req, res) => {
   try {
     const postId = parseInt(req.params.id);
+
     const userData = await User.findAll({
       attributes: { exclude: ['password', 'email'] },
       order: [['name', 'ASC']],
     });
+
     const users = userData.map((i) => i.get({ plain: true }));
-    console.log(users);
+
     const commentsData = await Comment.findAll({
       where: {
         post_id: postId,
       },
     });
     const comments = commentsData.map((i) => i.get({ plain: true }));
-    // console.log(comments);
+
+    const nameNames = (id) => {
+      for (let j = 0; j < users.length; j++) {
+        if (id === users[j].id) {
+          return users[j].name;
+        }
+      }
+    };
+
     comments.map((i) => {
       if (i.user_id === req.session.user_id) {
         i.owned = true;
       }
-      console.log(i.user_id);
-      const nameNames = () => {
-        for (let j = 0; j < users.length; j++) {
-          if (i.user_id === users[j].id) {
-            return users[j].name;
-          }
-        }
-      };
-      i.name = nameNames();
+      i.name = nameNames(i.user_id);
     });
-    console.log(comments);
+
     const postData = await Post.findByPk(postId);
     const post = postData.get({ plain: true });
+    post.name = nameNames(post.user_id);
     res.render('post', {
       post,
       comments,
