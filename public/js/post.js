@@ -7,7 +7,7 @@ const newPost = async () => {
     headers: { 'Content-Type': 'application/json' },
   });
   if (response.ok) {
-    document.location.replace('/');
+    document.location.replace('../');
   } else {
     alert(response.statusText);
   }
